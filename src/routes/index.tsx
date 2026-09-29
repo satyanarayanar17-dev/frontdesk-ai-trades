@@ -144,8 +144,8 @@ function Hero() {
           <p className="mt-5 max-w-xl text-lg leading-relaxed text-muted-foreground">
             A 24/7 AI phone receptionist built for plumbers and heating
             engineers. It answers every call, captures who's calling and what's
-            wrong, flags genuine emergencies — and sends you a tidy summary
-            before you've wiped your hands.
+            wrong, flags genuine emergencies — and records every call as a
+            structured lead ready for follow-up.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <a
@@ -162,8 +162,8 @@ function Hero() {
             </a>
           </div>
           <p className="mt-5 text-sm text-muted-foreground">
-            £0 setup · £249/month after the pilot if you keep it · keep your
-            existing number
+            £0 setup · £249/month after the pilot if you keep it · call forwarding
+            from your existing number set up with you during the pilot
           </p>
         </div>
 
@@ -203,7 +203,7 @@ function Hero() {
               ))}
             </dl>
             <p className="mt-4 rounded-lg bg-muted px-3 py-2 text-xs leading-relaxed text-muted-foreground">
-              Summary sent to your mobile and inbox the moment the call ends.
+              Call details captured as a structured lead the moment the call ends.
             </p>
           </div>
         </div>
@@ -272,8 +272,8 @@ function Workflow() {
     },
     {
       n: "4",
-      title: "You get a clean summary, instantly",
-      body: "The moment the call ends, a structured lead summary lands on your phone and inbox — name, number, postcode, issue, urgency and preferred times. Ready to act on in seconds.",
+      title: "You get a clean, structured lead",
+      body: "When the call ends, the details are captured as a structured lead — name, number, postcode, issue, urgency and preferred times — with urgent calls flagged for priority follow-up.",
     },
   ];
   return (
@@ -281,7 +281,7 @@ function Workflow() {
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <SectionHeading
           eyebrow="How it works"
-          title="Four steps between a ringing phone and a booked job."
+          title="Four steps between a ringing phone and a lead you can act on."
         />
         <ol className="mt-12 grid gap-5 sm:grid-cols-2">
           {steps.map((step) => (
@@ -340,7 +340,7 @@ function ExampleCall() {
     { from: "caller", text: "ASAP, please." },
     {
       from: "ai",
-      text: "I've flagged it as a priority. A summary is being sent to the engineer now and you'll get a call back shortly. Anything else I can help with?",
+      text: "I've recorded your details and flagged this as a priority for follow-up. Anything else I can help with?",
     },
     { from: "caller", text: "No, that's great. Thank you." },
   ];
@@ -350,7 +350,7 @@ function ExampleCall() {
         <SectionHeading
           eyebrow="Example call"
           title="What a 21:47 emergency call sounds like."
-          lead="A caller with a leaking boiler at night — answered, captured, triaged and booked in, without anyone lifting a spanner from the phone."
+          lead="A caller with a leaking boiler at night — answered, captured and triaged for follow-up, without anyone lifting a spanner from the phone."
         />
         <div className="mx-auto mt-10 max-w-2xl">
           <p className="mb-4 text-center text-xs font-semibold uppercase tracking-[0.14em] text-muted-foreground">
@@ -418,11 +418,11 @@ function Features() {
     },
     {
       title: "Structured lead summaries",
-      body: "Every call becomes a tidy summary sent straight to your phone and inbox — ready to quote, book or escalate.",
+      body: "Every call is recorded as a structured lead for follow-up — ready for you to quote, book or escalate.",
     },
     {
-      title: "Keeps your existing number",
-      body: "No new number to advertise. Calls are answered when you can't be, and your customers still call the number they know.",
+      title: "Works with your existing number",
+      body: "The plan is no new number to advertise: during the pilot we set up call forwarding from the number your customers already know.",
     },
   ];
   return (
@@ -458,8 +458,8 @@ function Pricing() {
     "24/7 call answering in a natural, professional manner",
     "Caller details captured: name, phone, postcode, issue, urgency",
     "Emergency vs routine triage with preferred appointment times",
-    "Structured lead summaries sent to your phone and inbox",
-    "Keep your existing phone number — no rebranding needed",
+    "Every call captured as a structured lead",
+    "Call forwarding from your existing number set up during the pilot",
   ];
   return (
     <section id="pricing" className="border-y border-border bg-muted/50 py-16 sm:py-20">
@@ -520,11 +520,11 @@ function Faq() {
     },
     {
       q: "Can it transfer urgent calls?",
-      a: "Yes. Genuinely urgent calls — a major leak, no heating in winter, a vulnerable customer — are flagged immediately and you're notified straight away so you can ring the customer back within minutes. It's a managed service, so we'll agree the escalation rules with you during setup.",
+      a: "Yes. Genuinely urgent calls — a major leak, no heating in winter, a vulnerable customer — are flagged as urgent in the lead record for priority follow-up. It's a managed service, so we'll agree how urgent calls are escalated to you during setup.",
     },
     {
       q: "Can I keep my existing number?",
-      a: "Yes. Nothing changes for your customers — they keep calling the number on your van, your website and your Google listing. FrontDesk simply answers when you can't get to the phone.",
+      a: "That's the aim. During the pilot we set up call forwarding with you so customers keep calling the number on your van, website and Google listing, and FrontDesk answers when you can't.",
     },
     {
       q: "What happens after the pilot?",
