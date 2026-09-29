@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { PilotForm } from "@/components/PilotForm";
 
 export const Route = createFileRoute("/")({
@@ -624,7 +624,8 @@ function Footer() {
       <div className="border-t border-border py-4">
         <p className="mx-auto max-w-6xl px-4 text-center text-[11px] text-muted-foreground sm:px-6">
           Call examples on this page are fictional and shown for illustration
-          only. © {new Date().getFullYear()} FrontDesk AI for Trades.
+          only. © {new Date().getFullYear()} FrontDesk AI for Trades. ·{" "}
+          <Link to="/login" className="hover:text-foreground">Owner login</Link>
         </p>
       </div>
     </footer>
