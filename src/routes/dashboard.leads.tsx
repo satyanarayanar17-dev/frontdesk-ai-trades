@@ -173,7 +173,7 @@ function Section({ title, f }: { title: string; f: [string, string | null | unde
   );
 }
 
-function Stat({ title, value, sub, tone }: { title: string; value: string; sub?: string; tone?: "ok" | "bad" }) {
+function Stat({ title, value, sub, tone }: { title: string; value: string; sub?: string | undefined; tone?: "ok" | "bad" | undefined }) {
   return (
     <div className="rounded-xl border border-border bg-card p-4">
       <p className="text-xs text-muted-foreground">{title}</p>
