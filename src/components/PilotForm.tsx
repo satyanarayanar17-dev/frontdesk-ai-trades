@@ -1,14 +1,8 @@
 import { useState, type FormEvent } from "react";
 
-/**
- * Pilot interest form.
- *
- * NOTE — DEMO SUBMISSION ONLY: no real backend is connected in this build.
- * Values are validated in the browser and, on success, held in local
- * component state only. Nothing is sent to or stored on any server.
- * Replace handleSubmit with a real endpoint (server function / webhook)
- * before wiring this to live prospects.
- */
+import { friendlyError, getSupabase } from "@/lib/supabase";
+
+/** Pilot interest form — inserts into public.frontdesk_pilot_interests. */
 
 type Fields = {
   businessName: string;
@@ -63,18 +57,43 @@ export function PilotForm() {
   const [fields, setFields] = useState<Fields>(EMPTY);
   const [errors, setErrors] = useState<Errors>({});
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [honeypot, setHoneypot] = useState("");
 
   const set = (key: keyof Fields) => (value: string) => {
     setFields((f) => ({ ...f, [key]: value }));
     setErrors((e) => (e[key] ? { ...e, [key]: undefined } : e));
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (submitting) return;
     const nextErrors = validate(fields);
     setErrors(nextErrors);
     if (Object.values(nextErrors).some(Boolean)) return;
-    // Demo submission — see the note at the top of this file.
+    setSubmitError(null);
+    if (honeypot) {
+      setSubmitted(true); // silently drop bots
+      return;
+    }
+    setSubmitting(true);
+    const t = (v: string) => v.trim() || null;
+    const { error } = await getSupabase().from("frontdesk_pilot_interests").insert({
+      business_name: fields.businessName.trim(),
+      contact_name: fields.contactName.trim(),
+      email: fields.email.trim(),
+      phone: fields.phone.trim(),
+      website: t(fields.website),
+      city: fields.city.trim(),
+      calls_per_week: t(fields.callsPerWeek),
+      notes: t(fields.notes),
+    });
+    setSubmitting(false);
+    if (error) {
+      setSubmitError(friendlyError(error));
+      return;
+    }
     setSubmitted(true);
   };
 
@@ -118,8 +137,14 @@ export function PilotForm() {
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="rounded-2xl border border-border bg-card p-6 shadow-sm sm:p-8"
+      className="relative rounded-2xl border border-border bg-card p-6 shadow-sm sm:p-8"
     >
+      <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+        <label>
+          Company fax
+          <input tabIndex={-1} autoComplete="off" value={honeypot} onChange={(e) => setHoneypot(e.target.value)} />
+        </label>
+      </div>
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
           <label htmlFor="businessName" className={labelClass}>
@@ -288,11 +313,18 @@ export function PilotForm() {
         </div>
       </div>
 
+      {submitError && (
+        <p className="mt-5 rounded-lg bg-destructive/10 px-3 py-2 text-sm text-destructive" role="alert">
+          {submitError} Your details are still filled in — just press the button again.
+        </p>
+      )}
       <button
         type="submit"
-        className="mt-6 inline-flex w-full items-center justify-center rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring sm:w-auto"
+        disabled={submitting}
+        aria-busy={submitting}
+        className="mt-6 inline-flex w-full items-center justify-center rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring sm:w-auto disabled:opacity-60"
       >
-        Request my 7-day pilot
+        {submitting ? "Sending…" : "Request my 7-day pilot"}
       </button>
       <p className="mt-3 text-xs text-muted-foreground">
         No setup fee. £249/month after the pilot if you keep it — usage limits
