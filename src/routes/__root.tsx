@@ -77,18 +77,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "FrontDesk AI for Trades" },
+      { title: "FRONTDESK | AI call handling for busy businesses" },
       {
         name: "description",
         content:
-          "24/7 AI phone receptionist for UK plumbing and heating businesses. Every call answered, every enquiry captured.",
+          "FRONTDESK answers business calls, handles routine enquiries and captures appointment or job requests for UK service businesses.",
       },
-      { name: "author", content: "FrontDesk AI for Trades" },
-      { property: "og:title", content: "FrontDesk AI for Trades" },
+      { name: "author", content: "FRONTDESK" },
+      { property: "og:title", content: "FRONTDESK | AI call handling for busy businesses" },
       {
         property: "og:description",
         content:
-          "24/7 AI phone receptionist for UK plumbing and heating businesses. Every call answered, every enquiry captured.",
+          "FRONTDESK answers business calls, handles routine enquiries and captures appointment or job requests for UK service businesses.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

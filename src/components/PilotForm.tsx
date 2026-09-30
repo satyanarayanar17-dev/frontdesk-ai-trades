@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from "react";
 
 import { friendlyError, getSupabase } from "@/lib/supabase";
+import { Button } from "@/components/ui/button";
 
 /** Pilot interest form — inserts into public.frontdesk_pilot_interests. */
 
@@ -53,7 +54,7 @@ const labelClass = "mb-1.5 block text-sm font-medium text-foreground";
 
 const errorClass = "mt-1.5 text-xs text-destructive";
 
-export function PilotForm() {
+export function PilotForm({ source = "home", buttonText = "Start a 14-day pilot", kind = "pilot" }: { source?: "home" | "dental" | "trades" | "demo"; buttonText?: string; kind?: "pilot" | "demo" }) {
   const [fields, setFields] = useState<Fields>(EMPTY);
   const [errors, setErrors] = useState<Errors>({});
   const [submitted, setSubmitted] = useState(false);
@@ -87,7 +88,7 @@ export function PilotForm() {
       website: t(fields.website),
       city: fields.city.trim(),
       calls_per_week: t(fields.callsPerWeek),
-      notes: t(fields.notes),
+      notes: `[source:${source}] [request:${kind}]${fields.notes.trim() ? ` ${fields.notes.trim()}` : ""}`,
     });
     setSubmitting(false);
     if (error) {
@@ -116,10 +117,10 @@ export function PilotForm() {
         </div>
         <h3 className="mt-5 text-xl font-semibold">Thanks — you're on the list.</h3>
         <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-          We'll be in touch within one working day to set up your 7-day pilot
+          Thanks for your {kind === "demo" ? "demo request" : "14-day pilot enquiry"}
           {fields.businessName.trim() ? ` for ${fields.businessName.trim()}` : ""}.
         </p>
-        <button
+        <Button
           type="button"
           onClick={() => {
             setFields(EMPTY);
@@ -128,7 +129,7 @@ export function PilotForm() {
           className="mt-6 text-sm font-medium text-brand underline-offset-4 hover:underline"
         >
           Submit another enquiry
-        </button>
+        </Button>
       </div>
     );
   }
@@ -155,7 +156,7 @@ export function PilotForm() {
             type="text"
             autoComplete="organization"
             className={inputClass}
-            placeholder="e.g. Smith Plumbing & Heating"
+            placeholder="Your business or practice"
             value={fields.businessName}
             onChange={(e) => set("businessName")(e.target.value)}
             aria-invalid={Boolean(errors.businessName)}
@@ -177,7 +178,7 @@ export function PilotForm() {
             type="text"
             autoComplete="name"
             className={inputClass}
-            placeholder="e.g. James Smith"
+            placeholder="Your name"
             value={fields.contactName}
             onChange={(e) => set("contactName")(e.target.value)}
             aria-invalid={Boolean(errors.contactName)}
@@ -306,7 +307,7 @@ export function PilotForm() {
             id="notes"
             rows={4}
             className={`${inputClass} resize-none`}
-            placeholder="e.g. One-man band, lots of evening calls, existing answerphone loses enquiries…"
+            placeholder="What calls would you like help with?"
             value={fields.notes}
             onChange={(e) => set("notes")(e.target.value)}
           />
@@ -318,17 +319,16 @@ export function PilotForm() {
           {submitError} Your details are still filled in — just press the button again.
         </p>
       )}
-      <button
+      <Button
         type="submit"
         disabled={submitting}
         aria-busy={submitting}
         className="mt-6 inline-flex w-full items-center justify-center rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring sm:w-auto disabled:opacity-60"
       >
-        {submitting ? "Sending…" : "Request my 7-day pilot"}
-      </button>
+        {submitting ? "Sending…" : buttonText}
+      </Button>
       <p className="mt-3 text-xs text-muted-foreground">
-        No setup fee. £249/month after the pilot if you keep it — usage limits
-        and fair-use terms apply.
+        {kind === "pilot" ? "£0 setup for founding customers. Fair-use terms apply." : "We'll get in touch to arrange a demo. No public demo number is available yet."}
       </p>
     </form>
   );
