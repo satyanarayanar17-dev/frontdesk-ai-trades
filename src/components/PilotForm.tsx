@@ -54,7 +54,7 @@ const labelClass = "mb-1.5 block text-sm font-medium text-foreground";
 
 const errorClass = "mt-1.5 text-xs text-destructive";
 
-export function PilotForm({ source = "home", buttonText = "Start a 14-day pilot", kind = "pilot" }: { source?: "home" | "dental" | "trades" | "demo"; buttonText?: string; kind?: "pilot" | "demo" }) {
+export function PilotForm({ source = "home", buttonText = "Start a 14-day pilot", kind = "pilot" }: { source?: "home" | "dental" | "trades" | "demo"; buttonText?: string | undefined; kind?: "pilot" | "demo" }) {
   const [fields, setFields] = useState<Fields>(EMPTY);
   const [errors, setErrors] = useState<Errors>({});
   const [submitted, setSubmitted] = useState(false);

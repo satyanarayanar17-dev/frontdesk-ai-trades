@@ -3,7 +3,7 @@ import { useState, type ReactNode } from "react";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-export function Mark({ descriptor }: { descriptor?: string }) {
+export function Mark({ descriptor }: { descriptor?: string | undefined }) {
   return <span className="inline-flex items-center gap-3"><svg viewBox="0 0 42 42" className="h-9 w-9 shrink-0" role="img" aria-label="FrontDesk monogram"><rect x="1" y="1" width="40" height="40" rx="5" className="fill-brand-ink"/><path d="M10 31V11h13M10 20h10M25 11h3c7 0 10 4 10 10s-3 10-10 10h-7V18" fill="none" stroke="white" strokeWidth="3.5" strokeLinecap="square"/><path d="M24 24c2 3 5 4 8 2" fill="none" className="stroke-brand" strokeWidth="3" strokeLinecap="round"/></svg><span className="flex flex-col leading-none"><strong className="font-display text-base font-extrabold">FRONTDESK</strong>{descriptor && <span className="mt-1 text-[10px] font-bold tracking-[0.14em] text-brand">{descriptor}</span>}</span></span>;
 }
 const nav = [{ label: "Dental", to: "/dental" }, { label: "Trades", to: "/trades" }, { label: "How it works", to: "/how-it-works" }, { label: "Pricing", to: "/pricing" }, { label: "Demo", to: "/demo" }] as const;
