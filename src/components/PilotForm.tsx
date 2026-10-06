@@ -57,7 +57,7 @@ const labelClass = "mb-1.5 block text-sm font-medium text-foreground";
 
 const errorClass = "mt-1.5 text-xs text-destructive";
 
-export function PilotForm({ source = "home", buttonText = "Request Pilot Access", kind = "pilot" }: { source?: "home" | "dental" | "trades" | "demo"; buttonText?: string | undefined; kind?: "pilot" | "demo" }) {
+export function PilotForm({ source = "home", buttonText = "Start a 7-day pilot", kind = "pilot" }: { source?: "home" | "dental" | "trades" | "demo"; buttonText?: string | undefined; kind?: "pilot" | "demo" }) {
   const [fields, setFields] = useState<Fields>(EMPTY);
   const [errors, setErrors] = useState<Errors>({});
   const [submitted, setSubmitted] = useState(false);
@@ -142,7 +142,7 @@ export function PilotForm({ source = "home", buttonText = "Request Pilot Access"
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="relative rounded-2xl border border-border bg-card p-6 shadow-sm sm:p-8"
+      className="relative rounded-2xl border border-border bg-card p-6 shadow-[0_24px_60px_-38px_color-mix(in_oklab,var(--brand-ink)_22%,transparent)] sm:p-8"
     >
       <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
         <label>
