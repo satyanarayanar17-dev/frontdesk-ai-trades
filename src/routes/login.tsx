@@ -1,16 +1,18 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
 import { friendlyError, getSupabase, isOwnerEmail } from "@/lib/supabase";
+import { Button } from "@/components/ui/button";
+import { Mark } from "@/components/Marketing";
 
 export const Route = createFileRoute("/login")({
   staticData: { sitemap: false },
   ssr: false,
   head: () => ({
     meta: [
-      { title: "Owner login — FrontDesk" },
-      { name: "description", content: "Owner sign-in for the FrontDesk operations dashboard." },
-      { property: "og:title", content: "Owner login — FrontDesk" },
-      { property: "og:description", content: "Owner sign-in for the FrontDesk operations dashboard." },
+      { title: "Owner login — Callwoven" },
+      { name: "description", content: "Owner sign-in for the Callwoven operations dashboard." },
+      { property: "og:title", content: "Owner login — Callwoven" },
+      { property: "og:description", content: "Owner sign-in for the Callwoven operations dashboard." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "robots", content: "noindex" },
@@ -51,11 +53,9 @@ function LoginPage() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-muted/40 px-4">
-      <div className="w-full max-w-sm rounded-2xl border border-border bg-card p-8 shadow-sm">
-        <Link to="/" className="text-sm font-bold tracking-tight">
-          FrontDesk <span className="font-medium text-muted-foreground">Ops</span>
-        </Link>
+    <div className="callwoven-hero flex min-h-screen items-center justify-center px-4">
+      <div className="w-full max-w-sm rounded-2xl border border-background/80 bg-card/95 p-8 shadow-xl">
+        <Link to="/" aria-label="Callwoven home"><Mark descriptor="OPS" /></Link>
         <h1 className="mt-6 text-xl font-semibold">Owner sign-in</h1>
         {state === "sent" ? (
           <p className="mt-3 text-sm text-muted-foreground">
@@ -74,13 +74,13 @@ function LoginPage() {
               className="w-full rounded-lg border border-input bg-background px-3.5 py-2.5 text-sm outline-none focus:border-ring focus:ring-2 focus:ring-ring/30"
             />
             {error && <p className="text-xs text-destructive" role="alert">{error}</p>}
-            <button
+            <Button
               type="submit"
               disabled={state === "sending"}
-              className="w-full rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground hover:bg-primary/90 disabled:opacity-60"
+              className="h-11 w-full rounded-full"
             >
               {state === "sending" ? "Sending…" : "Send sign-in link"}
-            </button>
+            </Button>
           </form>
         )}
       </div>

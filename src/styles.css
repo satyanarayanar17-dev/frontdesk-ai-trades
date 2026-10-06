@@ -5,8 +5,8 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Design system — "FrontDesk"
- * Direction: premium UK B2B, deep navy ink, electric blue and clean neutrals.
+ * Design system — Callwoven
+ * Direction: warm, calm and credible with blush, powder blue and charcoal.
  */
 
 @theme inline {
@@ -39,37 +39,43 @@
   --color-brand: var(--brand);
   --color-brand-soft: var(--brand-soft);
   --color-brand-ink: var(--brand-ink);
+  --color-blush: var(--blush);
+  --color-powder: var(--powder);
+  --color-warm: var(--warm);
 }
 
 @theme {
-  --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Archivo", "Instrument Sans", ui-sans-serif, sans-serif;
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Cormorant Garamond", Georgia, serif;
 }
 
 :root {
-  --radius: 0.5rem;
-  --background: oklch(0.993 0.002 95);
-  --foreground: oklch(0.19 0.035 255);
+  --radius: 0.75rem;
+  --background: oklch(0.992 0.011 56);
+  --foreground: oklch(0.22 0.02 195);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.19 0.035 255);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.245 0.022 258);
-  --primary: oklch(0.48 0.20 256);
-  --primary-foreground: oklch(0.993 0.002 95);
+  --primary: oklch(0.22 0.02 195);
+  --primary-foreground: oklch(0.992 0.011 56);
   --secondary: oklch(0.955 0.006 250);
   --secondary-foreground: oklch(0.3 0.03 258);
-  --muted: oklch(0.96 0.005 250);
-  --muted-foreground: oklch(0.5 0.022 258);
-  --accent: oklch(0.945 0.018 235);
-  --accent-foreground: oklch(0.36 0.06 235);
+  --muted: oklch(0.975 0.01 55);
+  --muted-foreground: oklch(0.49 0.018 225);
+  --accent: oklch(0.93 0.035 205);
+  --accent-foreground: oklch(0.25 0.025 195);
   --destructive: oklch(0.577 0.19 27.325);
   --destructive-foreground: oklch(0.985 0.002 95);
-  --border: oklch(0.912 0.006 250);
-  --input: oklch(0.912 0.006 250);
-  --ring: oklch(0.6 0.07 235);
-  --brand: oklch(0.48 0.20 256);
-  --brand-soft: oklch(0.95 0.025 255);
-  --brand-ink: oklch(0.19 0.035 255);
+  --border: oklch(0.9 0.015 55);
+  --input: oklch(0.86 0.015 55);
+  --ring: oklch(0.66 0.07 205);
+  --brand: oklch(0.57 0.08 202);
+  --brand-soft: oklch(0.93 0.04 202);
+  --brand-ink: oklch(0.22 0.02 195);
+  --blush: oklch(0.88 0.055 20);
+  --powder: oklch(0.91 0.045 205);
+  --warm: oklch(0.992 0.011 56);
   --chart-1: oklch(0.485 0.082 235);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -144,10 +150,27 @@
     -webkit-font-smoothing: antialiased;
   }
 
+  :focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 3px;
+  }
+
   h1,
   h2,
   h3 {
     font-family: var(--font-display);
     letter-spacing: 0;
   }
+}
+
+@utility callwoven-hero {
+  background:
+    radial-gradient(circle at 12% 28%, color-mix(in oklab, var(--blush) 74%, transparent), transparent 38%),
+    radial-gradient(circle at 88% 58%, color-mix(in oklab, var(--powder) 92%, transparent), transparent 48%),
+    linear-gradient(105deg, color-mix(in oklab, var(--blush) 58%, var(--warm)), color-mix(in oklab, var(--powder) 80%, var(--warm)));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
 }
