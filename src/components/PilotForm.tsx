@@ -352,7 +352,7 @@ export function PilotForm({ source = "home", buttonText = "Start a 7-day pilot",
          {kind === "pilot" ? "Pilot offer: £0 setup and a free 7-day pilot. Indicative plans start at £149/month afterwards. No payment is taken on this website." : "We’ll contact you to arrange a demo tailored to your business. No public demo number is available on this page."}
       </p>
       <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-        By submitting, you’re asking FrontDesk to contact you about this request. Read our{" "}
+        By submitting, you’re asking Callwoven to contact you about this request. Read our{" "}
         <a href="/privacy" className="font-medium underline underline-offset-2 hover:text-foreground">
           privacy summary
         </a>
